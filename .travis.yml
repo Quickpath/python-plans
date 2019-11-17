@@ -25,7 +25,7 @@ before_script:
 
 script:
 - cd python
-- hab studio -D run bash -xe bootstrap-build.sh
+- hab studio -D run ./bootstrap-build.sh
 
 
 deploy:
