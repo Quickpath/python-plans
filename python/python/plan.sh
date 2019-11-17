@@ -1,7 +1,6 @@
 pkg_name=python
 pkg_distname=Python
-pkg_version=3.6.9
-#pkg_version=3.7.1
+pkg_version=3.7.5
 pkg_origin="${HAB_ORIGIN:-python}"
 pkg_license=('Python-2.0')
 pkg_maintainer="George Marshall <george@georgemarshall.name>"
@@ -10,8 +9,7 @@ and integrate systems more effectively."
 pkg_upstream_url=https://www.python.org/
 pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_source=https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz
-pkg_shasum=47fc92a1dcb946b9ed0abc311d3767b7215c54e655b17fd1d3f9b538195525aa
-#pkg_shasum=36c1b81ac29d0f8341f727ef40864d99d8206897be96be73dc34d4739c9c9f06
+pkg_shasum=8ecc681ea0600bbfb366f2b173f727b205bb825d93d2f0b286bc4e58d37693da
 pkg_deps=(
   core/bzip2
   core/expat
@@ -37,7 +35,7 @@ pkg_build_deps=(
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_interpreters=(bin/python bin/python3 bin/python3.6)
+pkg_interpreters=(bin/python bin/python3 bin/python3.7)
 do_setup_environment() {
    set_buildtime_env PYTHON_SITE_PACKAGES "lib/python${pkg_version%.*}/site-packages"
 }

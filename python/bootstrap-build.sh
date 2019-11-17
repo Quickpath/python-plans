@@ -3,7 +3,7 @@ export HAB_ORIGIN="${HAB_ORIGIN:-python}"
 DO_UPLOAD="${DO_UPLOAD:-false}"
 DO_BUILD="${DO_BUILD:-true}"
 
-for dir in python appdirs pyparsing six packaging setuptools wheel pip; do
+for dir in python appdirs setuptools pyparsing six packaging wheel pip; do
   cd $dir
   if [ "${DO_BUILD}" == "true" ]; then
     build
