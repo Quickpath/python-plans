@@ -1,0 +1,39 @@
+sudo: required
+dist: xenial
+services: docker
+language: bash
+
+install:
+- 'curl -sL https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash -s -- -v 0.79.1'
+
+branches:
+  only:
+  - master
+
+env:
+  global:
+  - HAB_ORIGIN=quickpath
+  # Pin to pre-license-change hab versions
+  - HAB_PKG=core/hab/0.79.1/20190410220617
+  - HAB_SUP_PKG=core/hab-sup/0.79.1/20190410223329
+  # HAB_AUTH_TOKEN
+  - secure: "AfYQoeW/eDaYYxnanWDtFLbgC1q6KW09e8kPjc8afAzCsa/SLJO4sl6dAkO+oofEaA/W9wBU1KDnkgoLbgCyXA8DvE8O2IIhqhHlSgL3fv4SPUHA1dEwz+4ftUz1LfenWAf59fW3hZeO3NRE20oD2U2YpT2rOy1f6SwG/nGcN2+Zn0IGE+dZudHIK6/QPsOmFYqiZ1rXv3IzzYn1FGBtUTGJw845y/Bw432DF9scki9YzdGtzt6oqsuUYXTxGGMvuLpV2gv6KQqe0HnYexXSaYOmUWqiK4wUa08SjPGGAwOQokIABDEffOPeE7S5d73dHrQ0JpD2bmoaQr9kE0nrZLrl8COZBhqbssc6u9Yt00ODecDOjwWxxN9x64ROy0FWmNBMSiU5A/TqQtX3UBhvYbz8nJppSTZ3g7VrJ4MC65JV9jss0YdQoXM4H2F7M4OWufuZi4BW7gJwne/2GN9u+NNVwY7ysqrulsRyWY1zsmMGPzXvMEb8ngQRnSaHyXmvicPApAqq3ajQkUeyNJXM/jOIHa90FhwwyfVP9RDWPE68XXkYClCdWvnvO9vPFnRseQ3D7gdEhGrOVMMyw/Kymp4xqreQco4QKyqITcOKo9iLLUYzmA5PPwuovx118akpIbCHF84AwhOVJb8LlmIHdDoNoqQU9t0t+wd8PUHn7ns="
+
+before_script:
+- hab origin key download $HAB_ORIGIN
+- hab origin key download -s $HAB_ORIGIN
+
+script:
+- cd python
+- hab studio -D run bash -xe bootstrap-build.sh
+
+
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: true
+  on:
+    branch: master
+
+notifications:
+  slack: thequickpath:acypSfAooI0Ro1oz1FjSFJ2f
