@@ -1,18 +1,22 @@
 #!/bin/bash -xe
 export HAB_ORIGIN="${HAB_ORIGIN:-python}"
-DO_UPLOAD="${DO_UPLOAD:-false}"
+DO_UPLOAD="${DO_UPLOAD:-true}"
 DO_BUILD="${DO_BUILD:-true}"
+PYTHON_PLANS="python appdirs setuptools pyparsing six packaging wheel pip"
 
-for dir in python appdirs setuptools pyparsing six packaging wheel pip; do
-  cd $dir
-  if [ "${DO_BUILD}" == "true" ]; then
+if [ "${DO_BUILD}" == "true" ]; then
+  for dir in $PYTHON_PLANS; do
+    cd $dir
     build
-  fi
+    cd ..
+  done
+fi
 
-  if [ "${DO_UPLOAD}" == "true" ]; then
+if [ "${DO_UPLOAD}" == "true" ]; then
+  for dir in $PYTHON_PLANS; do
+    cd $dir
     source results/last_build.env
-    # make sure you set HAB_AUTH_TOKEN to a valid token for this to work
     hab pkg upload results/$pkg_artifact --channel stable
-  fi
-  cd ..
-done
+    cd ..
+  done
+fi

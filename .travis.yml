@@ -13,9 +13,6 @@ branches:
 env:
   global:
   - HAB_ORIGIN=quickpath
-  # Pin to pre-license-change hab versions
-  - HAB_PKG=core/hab/0.79.1/20190410220617
-  - HAB_SUP_PKG=core/hab-sup/0.79.1/20190410223329
   # HAB_AUTH_TOKEN
   - secure: "hEATGvkBSQZp6/pJnLWBpxN2s6rMahJw6goeEUM7P8Xb9UykZlbtklJuPiZ29vWJP2gmoDZps4POIFl1HRSTDGiOTekHSz4HAaLg6caQfVOhPe85Id37AzETwNOtvjX5iDa5N2NJs5uufIsOk6HCXLrcOd8bUrYKOH9Y/249GsKlZlJYIv4ckDVS4YL7jM9PRKxpViyY9YpM89Rcb16CgwhJSsu8eWV8+6F9ueYYq06gFuQrzJQTiOTeNqWtmd6Pt4c8129r4lmsee+1Iz7dicsmh7D0tg270U4PePtBvqxwb/YYqY30xrbhlyEW9/LfMht4jHkGjnP59xQDh5H2EuV4b4r7xkk2zzhvjoL5MDzHYzWdGh3FnfYUvQz4JLyHrXYTHUMl9a95BD0s7DdPikQZpTEaMGmL06OiJwBqU2Q0QXDJ3RqAJ0tRg6BvGfS0QtidqTSRkIx07pryfe8aV8QZOUSkQlFtuS1VejV8jCzobsOk/ac+1SodP6E2CSLd4Rkcw40rpSkeCqZs61Yxo39V5y4nBDOvy2O1I4Uq+KSfMlzO4wzuxtAZ0LPq8GBHePHyePB+rqEgURK6VCWr6huOUk4JNRgZ0fSpmFhLBLCUa9FiXICtD/MzUz4s4Ve0tZjiTd7/bk1oRhaPFvr+pnazA3HRWaaGxYyDoNc7nQ8="
 
@@ -27,16 +24,6 @@ script:
 - cd python
 - hab studio -D run ./bootstrap-build.sh
 - cd ..
-
-
-deploy:
-- provider: script
-  skip_cleanup: true
-  script:
-  - cd python
-  - hab studio -D run "DO_UPLOAD=true ./bootstrap-build.sh"
-  on:
-    branch: master
 
 notifications:
   slack: thequickpath:acypSfAooI0Ro1oz1FjSFJ2f
