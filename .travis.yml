@@ -26,12 +26,15 @@ before_script:
 script:
 - cd python
 - hab studio -D run ./bootstrap-build.sh
+- cd ..
 
 
 deploy:
 - provider: script
   skip_cleanup: true
-  script: true
+  script:
+  - cd python
+  - hab studio -D run "DO_UPLOAD=true ./bootstrap-build.sh"
   on:
     branch: master
 
